@@ -22,7 +22,7 @@ let Ghost: Sprite = null
 let Random = 0
 let Hero: Sprite = null
 let GameUpdate = 0
-if (game.ask("", "")) {
+if (game.ask("Press A for Expert", "Press B for Easy")) {
     GameUpdate = 500
 } else {
     GameUpdate = 1500
