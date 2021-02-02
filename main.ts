@@ -21,6 +21,12 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
 let Ghost: Sprite = null
 let Random = 0
 let Hero: Sprite = null
+let GameUpdate = 0
+if (game.ask("", "")) {
+    GameUpdate = 500
+} else {
+    GameUpdate = 1500
+}
 tiles.setTilemap(tilemap`level1`)
 Hero = sprites.create(img`
     . . . . . . . . . . . . . . . . 
@@ -40,7 +46,8 @@ Hero = sprites.create(img`
     . . . f c c f f f f f f . . . . 
     . . . . f f . . . f f f . . . . 
     `, SpriteKind.Player)
-let Home = sprites.create(img`
+Hero.setPosition(60, 60)
+let Princess = sprites.create(img`
     . . . . . . 5 . 5 . . . . . . . 
     . . . . . f 5 5 5 f f . . . . . 
     . . . . f 1 5 2 5 1 6 f . . . . 
@@ -60,7 +67,7 @@ let Home = sprites.create(img`
     `, SpriteKind.Food)
 info.setLife(3)
 let Speed = 50
-game.onUpdateInterval(2000, function () {
+game.onUpdateInterval(GameUpdate, function () {
     Random = randint(1, 4)
     Ghost = sprites.create(img`
         . . f f f . . . . . . . . . . . 
@@ -87,11 +94,11 @@ game.onUpdateInterval(2000, function () {
         Ghost.setPosition(160, 60)
         Ghost.setVelocity(Speed * -1, 0)
     } else if (Random == 3) {
-        Ghost.setPosition(0, 60)
-        Ghost.setVelocity(Speed, 0)
-    } else {
         Ghost.setPosition(80, 120)
         Ghost.setVelocity(0, Speed * -1)
+    } else {
+        Ghost.setPosition(0, 60)
+        Ghost.setVelocity(Speed, 0)
     }
     Speed += 2
 })
